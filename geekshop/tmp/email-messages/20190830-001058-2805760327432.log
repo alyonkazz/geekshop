@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9GR0YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IHE4?=
+From: django@geekshop.local
+To: sdf@sfd.fd
+Date: Thu, 29 Aug 2019 21:10:58 -0000
+Message-ID: <156711305814.9944.7268737452534702993@DESKTOP-HT72RIT>
+
+Для подтверждения учётной записи q8 на портале http://localhost:8000 перейдите по ссылке: 
+http://localhost:8000/auth/verify/sdf@sfd.fd/5c9ac606181b08b1febae986ca2074db25eba9b6/
+-------------------------------------------------------------------------------

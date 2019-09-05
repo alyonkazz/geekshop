@@ -1,0 +1,18 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block container %}
+    <p>
+        Вы уверены, что хотите
+        {% if object.is_active %}удалить{% else %}восстановить{% endif %}
+        категорию {{ object.name }}
+        ?
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="сохранить">
+    </form>
+
+    <a href="{% url 'myadmin:productcategory_list' %}">отменить</a>
+{% endblock %}

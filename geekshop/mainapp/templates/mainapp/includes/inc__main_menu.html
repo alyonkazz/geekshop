@@ -1,0 +1,68 @@
+{% load static %}
+
+<div class="header">
+    <a href="{% url 'main:index' %}"><img class="logo_img" src="{% static 'img/blockbuster-logo.jpg' %}" alt="Logo"></a>
+    <div>
+        <span>
+            {% if user.is_authenticated %}
+                <div class="btn-group">
+                    <a class="btn btn-primary dropdown-toggle header__select" data-toggle="dropdown" href="#">
+                        Привет, {{ user.first_name|default:'Пользователь'}}!
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="{% url 'auth:update' %}">профиль</a></li>
+                        <li class="dropdown-item"><a href="{% url 'order:orders_list' %} ">заказы</a></li>
+                    </ul>
+                </div>
+            {% endif %}
+        </span>
+        <span>
+            {% if user.is_superuser %}
+            <a href="{% url 'myadmin:index' %}" class="menu__link">
+                админка
+            </a>
+            {% endif %}
+        </span>
+        <span>
+            {% if user.is_authenticated %}
+            <a href="{% url 'auth:logout' %}" class="menu__link">
+                Выход
+            </a>
+            {% else %}
+            <a href="{% url 'auth:login' %}" class="menu__link">
+                Вход
+            </a>
+            {% endif %}
+        </span>
+        <ul class="menu">
+             <li >
+                <a href="{% url 'main:index' %}"
+                   class="menu__link {% if request.resolver_match.url_name == 'index' %}menu__link_active{% endif %}">
+                    Главная
+                </a>
+            </li>
+             <li >
+                <a href="{% url 'main:catalog' %}"
+                   class="menu__link {% if request.resolver_match.url_name == 'catalog' or request.resolver_match.url_name == 'category' %}
+                        menu__link_active
+                        {% endif %}">
+                    Каталог
+                </a>
+            </li>
+             <li >
+                <a href="{% url 'main:contacts' %}"
+                   class="menu__link {% if request.resolver_match.url_name == 'contacts' %}menu__link_active{% endif %}">
+                    Контакты
+                </a>
+            </li>
+        </ul>
+        <a href="{% url 'basket:index' %}" class="menu__link header__basket">
+            корзина
+            {% if basket %}
+                {{ basket.0.total_cost|floatformat:0 }} руб
+                ({{ basket.0.total_quantity }} шт)
+            {% endif %}
+        </a>
+    </div>
+</div>

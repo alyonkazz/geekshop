@@ -1,0 +1,26 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block container %}
+    {% include 'mainapp/includes/inc__main_menu.html' %}
+    <h3>Регистрация</h3>
+    <form action="#">
+        Имя <input class="contacts_input_text" type="text" placeholder="Иван"><br>
+        Фамилия <input class="contacts_input_text" type="text" placeholder="Петров"><br>
+        Email <input class="contacts_input_text" type="email" placeholder="ivanpetrov@mail.ru"><br>
+        Дополнительная информация <br>
+        <textarea class="contacts_input_textarea" name="" id="" cols="30" rows="10"></textarea><br>
+        <button class="contacts_button" type="submit">Отправить</button>
+        <button class="contacts_button" type="reset">Удалить</button>
+    </form>
+    <br>
+    <h3>Контактная информация</h3>
+    {% for item in location %}
+    <p>Контактный номер телефона: {{ item.phone }}</p>
+    <p>Email: {{ item.email }}</p>
+    <p>Адрес: {{ item.address }}</p>
+    {% endfor %}
+    <iframe class="contacts_map"
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3A096a3a56c5995593be26b9177a93b145fdef1e4cb1365086e8737cb6a0fc6773&amp;source=constructor"
+            frameborder="0"></iframe>
+{% endblock %}

@@ -1,0 +1,383 @@
+@background_header_img: url(/static/img/images.jpg);
+@background_color: aliceblue;
+@text_color: #551A8B;
+@activecolor: #5bde6f;
+@notactivecolor: #bf4c51;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    font-family: "TeX Gyre Schola", Palatino, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+h1 {
+    color: #551A8B;
+    font-size: 26px;
+    text-transform: uppercase;
+    padding: 7px 0px;
+}
+
+h2 {
+    color: orangered;
+    font-size: 22px;
+    padding: 7px 0px;
+}
+
+h3 {
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: antiquewhite;
+    font-family: fantasy;
+    font-style: normal;
+    padding: 7px 0px;
+}
+
+.container {
+    width: 1200px;
+    padding: 5px;
+    display: block;
+    margin: 0 auto;
+    background-color: #DADEFF;
+}
+
+.header {
+    background: @background_header_img;
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-color: @background_color;
+    opacity: 0.9;
+    display: flex;
+    height: auto;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    
+    &__basket {
+        float: right;
+    }
+
+
+    &__select {
+        border-style: none;
+        color: #551a8b;
+        font: bold italic 19px serif;
+        text-shadow: 1px 1px 1px #eeb3ff, 0 0 1em white;
+        text-decoration: none;
+        padding: 0px 7px;
+        text-transform: capitalize;
+        background-color: inherit;
+    }
+}
+
+.logo_img {
+    height: 60px;
+    border: 5px solid #551A8B;
+}
+
+.menu {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+    justify-content: space-around;
+    
+    &__left{
+        flex-wrap: wrap;
+        background-color: antiquewhite;
+        justify-content: flex-start;
+    }
+
+    &__link {
+        color: @text_color;
+        font: bold italic 19px serif;
+        text-shadow: 1px 1px 1px (@text_color + #999), 0 0 1em white;
+        text-decoration: none;
+        padding: 0px 7px;
+        text-transform: capitalize;
+
+
+        &:hover {
+            color: orange;
+        }
+
+        &_active {
+            color: #D741FF;
+
+            &:hover {
+                color: orange;
+            }
+        }
+    }
+}
+
+
+.catalog_product_link:hover {
+    color: orange;
+}
+
+
+
+.index_img {
+    width: 100%;
+}
+
+.tour_description {
+    color: orange;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+}
+
+.tour_program {
+    color: orange;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+}
+
+.product_list {
+    list-style-image: url(http://m.kino-teatr.ru/static/images/star1.png);
+    list-style-position: inside;
+    line-height: 20px;
+    color: coral;
+}
+
+.contacts_input_text {
+    font-family: cursive;
+    font-size: 16px;
+    background-color: papayawhip;
+    color: indigo;
+    width: 200px;
+    height: 30px;
+}
+
+.contacts_input_number {
+    font-family: cursive;
+    font-size: 16px;
+    background-color: papayawhip;
+    color: indigo;
+    width: 40px;
+    height: 20px;
+}
+
+.contacts_input_textarea {
+    font-family: cursive;
+    font-size: 16px;
+    background-color: papayawhip;
+    color: indigo;
+    width: 300px;
+    height: 200px;
+}
+
+.contacts_button {
+    font-family: "TeX Gyre Schola", Palatino, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 50px;
+    background-color: papayawhip;
+}
+
+.catalog_product_link {
+    color: indigo;
+    border-color: aqua;
+    text-shadow: 2px 1px 2px papayawhip, 0 0 1em #4A036F;
+}
+
+.catalog_img {
+    width: 150px;
+    margin: 1%;
+    border: 10px;
+    border-style: outset;
+    border-radius: 20px;
+    color: #4A036F;
+}
+
+.product_img {
+    width: 150px;
+    margin: 1%;
+    border: 10px solid transparent;
+    border-image: url("https://static3.depositphotos.com/1004330/178/i/450/depositphotos_1785897-stock-photo-celebration-star-framework.jpg");
+    border-image-slice: 100;
+}
+
+.logo_img:hover {
+    border: 5px solid orange;
+}
+
+.footer {
+    height: 80px;
+    margin-top: 15px;
+    background-color: @background_color;
+    border-top: 2px solid antiquewhite;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.footer_text {
+    transform: translateX(-25px);
+}
+
+.contacts_input_text:focus,
+.contacts_input_textarea:focus,
+.contacts_input_number:focus {
+    background-color: orange;
+    color: darkviolet;
+}
+
+.contacts_input_text[type=text],
+.contacts_input_textarea {
+    text-transform: capitalize;
+}
+
+.tour_description:first-letter,
+.tour_program:first-letter {
+    font: 2em "TeX Gyre Schola", Palatino, serif;
+    color: orangered;
+}
+
+.product_table {
+    border: 3px solid coral;
+    width: 100%;
+    height: 30px;
+    border-collapse: collapse;
+}
+
+.product_table_td {
+    border: 2px solid coral;
+}
+
+tr:first-child {
+    line-height: 40px;
+    color: orange;
+    text-shadow: 2px 1px 2px black, 0 0 1em red;
+}
+
+.product_img:hover {
+    border: none;
+    padding: 10px;
+}
+
+.contacts_map {
+    display: flex;
+    height: 374px;
+    width: 100%;
+}
+
+.product_buy {
+    display: flex;
+    align-items: center;
+}
+
+.contacts_button:hover {
+    
+}
+
+.product_button:active {
+    background-color: blueviolet;
+    border: 1px solid orange;
+}
+
+.product_img_link,
+.product_tour_description,
+.product_button {
+    padding: 5px;
+}
+
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: antiquewhite;
+}
+
+.catalog_prodacts {
+    display: block;
+    flex-basis: 300px;
+}
+
+.catalog_img:hover {
+    border: 10px outset orange;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.adminapp {
+    background-color: @notactivecolor;
+    margin: 10px 0px;
+
+    &_active {
+        background-color: @activecolor;
+    }
+}
+
+.hotdeal {
+    padding: 0px 20px;
+    
+    &__img {
+        width: 350px;
+    }
+}
+
+.sameproducts {
+    background-color: @background_color - #111111;
+    
+    &__img {
+        width: 150px;
+    }
+}
+
+
+.basket-list_img {
+    height: 120px;
+}
+
+.basket-list_record {
+    padding: 10px 0px;
+}
+
+
+
+.basket-list_span_img {
+    
+}
+
+
+
+.product {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10%;
+    
+    &__button {
+        margin-top: 1em;
+        width: 80%;
+        background-color: papayawhip;
+        border-radius: 50px;
+        border: 1px solid papayawhip;
+        font-family: "TeX Gyre Schola", Palatino, serif;
+        font-style: italic;
+        font-weight: 700;
+        font-size: 18px;
+        color: @text_color;
+        
+        &:hover {
+            background-color: orange;
+        }
+    }
+}

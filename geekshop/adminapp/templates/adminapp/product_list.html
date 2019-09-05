@@ -1,0 +1,37 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block container %}
+    <div class="categories_list">
+        <a href="{% url 'myadmin:product_create' productcategory.pk %}"
+           class="btn btn-primary new_category">
+            новый продукт
+        </a>
+        {% for object in object_list %}
+            <div class="adminapp {% if object.is_active %}adminapp_active{% endif %}">
+                <div class="category_name">
+                    {{ object.name|title }}
+                </div>
+                <div class="category_actions">
+                    <a href="{% url 'myadmin:product_read' object.pk %}"
+                       class="btn btn-info">
+                        подробнее
+                    </a>
+                    <a href="{% url 'myadmin:product_update' object.pk %}"
+                       class="btn btn-success">
+                        редактировать
+                    </a>
+                    <a href="{% url 'myadmin:product_delete' object.pk %}"
+                       class="btn btn-danger">
+                        {% if object.is_active %}удалить{% else %}восстановить{% endif %}
+                    </a>
+                </div>
+                <div class="category_desc">
+                    стоимость: {{ object.price }}
+                    остаток на складе: {{ object.quantity }}
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

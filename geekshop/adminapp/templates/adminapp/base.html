@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ page_title|title }}</title>
+        {% block css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        {% endblock %}
+        {% block js %}
+            <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+            <script src="{% static 'js/bootstrap.js' %}"></script>
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <h2>
+                Ваша админка, {{ user.first_name|title|default:'Пользователь' }}
+            </h2>
+            {% block menu %}
+            <div class="catalog">
+                <ul class="menu">
+                    <li>
+                        <a href="{% url 'main:index' %}"
+                           class="menu__link">
+                        на главную
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'myadmin:index' %}"
+                           class="menu__link {% if request.resolver_match.url_name == 'index' %}menu__link_active{% endif %}">
+                            пользователи
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'myadmin:productcategory_list' %}"
+                           class="menu__link {% if request.resolver_match.url_name == 'productcategory_list' %}menu__link_active{% endif %}">
+                            категории
+                            {% if category %}:
+                                <span>{{ category.name }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% endblock %}
+            {% block container %}
+            {% endblock %}
+
+            <footer class="footer">
+                <p class="footer_text">&copy; Все права защищены 2019</p>
+            </footer>
+        </div>
+    </body>
+</html>

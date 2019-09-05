@@ -1,0 +1,14 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+{% block container %}
+    <img src="{{ object.image|media_folder_products }}" alt="{{ product.short_desc }}">
+    <h3>{{ object.name }}</h3>
+    <p>{{ object.short_desc }}</p>
+    <p>{{ object.description }}</p>
+    стоимость <p>{{ object.price }}</p>
+    количество на складе <p>{{ object.quantity }}</p>
+
+    <a href="{% url 'myadmin:productcategory_products' object.category.pk %}">к списку продуктов</a>
+{% endblock %}

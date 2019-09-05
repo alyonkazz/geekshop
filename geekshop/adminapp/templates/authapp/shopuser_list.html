@@ -1,0 +1,22 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+{% block container %}
+    <a href="{% url 'myadmin:create' %}">новый пользователь</ноыф></a>
+    {% for object in object_list %}
+        <div class="adminapp {% if object.is_active %}adminapp_active{% endif %}">
+            <img src="{{ object.avatar|media_folder_users }}"
+                 alt="{{ object.username }}">
+            {% if object.is_superuser %}администратор
+            {% else %}пользователь
+            {% endif %}
+            <a href="{% url 'myadmin:update' object.pk %}">редактировать</a>
+            {% if object.is_active %}
+                <a href="{% url 'myadmin:delete' object.pk %}">удалить</a>
+            {% else %}
+                <a href="{% url 'myadmin:restore' object.pk %}">восстановить</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

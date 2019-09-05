@@ -1,0 +1,28 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block container %}
+    {% include 'mainapp/includes/inc__main_menu.html' %}
+    <h2>{{ product.name }}</h2>
+
+    <ul class="menu menu__left">
+        <li><a class="menu__link" href="{% url 'main:catalog' %}">каталог</a></li>
+        >
+        <li><a class="menu__link" href="{% url 'main:category' category.pk %}">{{ category.name|title }}</a></li>
+    </ul>
+
+    <div class="product">
+        <a href="{% url 'basket:basket_add' product.pk %}">
+            <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+        </a>
+        <div>
+            <p>Стоимость: {{ product.price }}</p>
+            <p>Количество на складе: {{ product.quantity }}</p>
+            <a class="product__button btn" href="{% url 'basket:basket_add' product.pk %}">заказать</a>
+        </div>
+    </div>
+        <p>{{ product.short_desc }}</p>
+        <p>{{ product.description }}</p>
+
+
+{% endblock %}

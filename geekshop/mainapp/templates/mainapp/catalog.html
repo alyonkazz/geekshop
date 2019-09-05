@@ -1,0 +1,29 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block container %}
+    {% include 'mainapp/includes/inc__main_menu.html' %}
+    <h1>Каталог</h1>
+    <div class="catalog">
+        {% include 'mainapp/includes/inc__catalog_menu.html' %}
+    </div>
+    <div class="hotdeal">
+        <h2>Горячее предложение</h2>
+        <a href="{% url 'main:product' hot_product.pk %}">
+            <img src="/media/{{ hot_product.image }}" alt="{{ hot_product.short_desc }}" class="hotdeal__img">
+            <h3>{{ hot_product.name }}</h3>
+            <p>{{ hot_product.short_desc }}</p>
+        </a>
+    </div>
+    <div class="sameproducts">
+        <h2>Похожие товары</h2>
+        <a href="#">
+            {% for product in same_products %}
+            <img src="{{ product.image.url }}" alt="" class="sameproducts__img">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.short_desc }}</p>
+            {% endfor %}
+        </a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block container %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="сохранить">
+    </form>
+    <a href="{% url 'myadmin:productcategory_list' %}">к списку категорий</a>
+{% endblock %}
