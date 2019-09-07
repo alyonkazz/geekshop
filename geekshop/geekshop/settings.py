@@ -25,7 +25,7 @@ SECRET_KEY = 'u8s_#dvn$8@^7rtc8vq3r9293^dsp6oky%!a$7!l0(n!u)e@hf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.2.8', 'geekshop']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.2.8', 'geekshop', '94.141.168.229']
 
 # Application definition
 

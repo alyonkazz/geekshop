@@ -21,7 +21,6 @@ ipython-genutils==0.2.0
 Jinja2==2.10.1
 jsonschema==3.0.2
 jupyter-core==4.5.0
-MainApp==0.1
 MarkupSafe==1.1.1
 oauthlib==3.1.0
 Pillow==6.1.0
