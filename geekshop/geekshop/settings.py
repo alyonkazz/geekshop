@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
 import os
 import json
 
@@ -23,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'u8s_#dvn$8@^7rtc8vq3r9293^dsp6oky%!a$7!l0(n!u)e@hf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.2.8', 'geekshop', '94.141.168.229']
 
@@ -91,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'django',
         'PASSWORD': 'geekbrains',
-        'HOST': 'localhost'
+        'HOST': '192.168.2.8'
     }
 }
 
@@ -129,10 +128,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    'static',
+    os.path.join(BASE_DIR, 'static'),
 )
 
 MEDIA_URL = '/media/'
@@ -167,7 +168,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
 )
 
-with open('/raid/geekshop/geekshop/geekshop/vk.json', 'r') as f:
+with open(os.path.join(BASE_DIR, 'geekshop/vk.json'), 'r') as f:
     VK = json.load(f)
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = VK['SOCIAL_AUTH_VK_OAUTH2_KEY']
