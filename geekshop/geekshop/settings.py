@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
 import os
 import json
 
@@ -23,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'u8s_#dvn$8@^7rtc8vq3r9293^dsp6oky%!a$7!l0(n!u)e@hf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.2.8', 'geekshop', '94.141.168.229', '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.2.8', 'geekshop', '94.141.168.229']
 
 # Application definition
 
@@ -44,7 +43,7 @@ INSTALLED_APPS = [
     'ordersapp',
     'debug_toolbar',
     'template_profiler_panel',
-
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -95,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'django',
         'PASSWORD': 'geekbrains',
-        'HOST': 'localhost'
+        'HOST': '192.168.2.8'
     }
 }
 
@@ -133,10 +132,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    'static',
+    os.path.join(BASE_DIR, 'static'),
 )
 
 MEDIA_URL = '/media/'
@@ -171,7 +172,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
 )
 
-with open('/raid/geekshop/geekshop/geekshop/vk.json', 'r') as f:
+with open(os.path.join(BASE_DIR, 'geekshop/vk.json'), 'r') as f:
     VK = json.load(f)
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = VK['SOCIAL_AUTH_VK_OAUTH2_KEY']
@@ -196,6 +197,7 @@ if DEBUG:
     def show_toolbar(request):
         return True
 
+
     DEBUG_TOOLBAR_CONFIG = {
         'SHOW_TOOLBAR_CALLBACK': show_toolbar,
     }
@@ -216,5 +218,3 @@ if DEBUG:
         'debug_toolbar.panels.profiling.ProfilingPanel',
         'template_profiler_panel.panels.template.TemplateProfilerPanel',
     ]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')

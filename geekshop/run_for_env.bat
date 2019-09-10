@@ -1,2 +1,2 @@
-C:\Users\Alyonkazz\PycharmProjects\Vetrova_Alena\venv\Scripts\python.exe manage.py runserver 0.0.0.0:8000
+C:\Users\Alyonkazz\PycharmProjects\geekshop\venv\Scripts\python.exe manage.py runserver 0.0.0.0:8000
 pause

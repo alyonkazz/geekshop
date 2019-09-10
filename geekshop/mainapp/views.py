@@ -84,11 +84,18 @@ def product(request, pk):
 
 
 def contacts(request):
-    with open('geekshop/locations.json', 'r', encoding='utf-8') as f:
-        locations = json.load(f)
+    # with open('geekshop/locations.json', 'r', encoding='utf-8', errors='ignore') as f:
+    #     locations = json.load(f)
+
+    # def load_from_json(file_name):
+    #     with open(os.path.join(JSON_PATH, file_name + '.json'), 'r', errors='ignore') as infile:
+    #         return json.load(infile)
 
     context = {
         'page_title': 'контакты',
-        'location': locations,
+        # 'location': locations,
+        "phone": "+7-(555)-555-5555",
+        "email": "email@mail.ru",
+        "address": "11"
     }
     return render(request, 'mainapp/contacts.html', context)

@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.core.mail import send_mail
 from django.conf import settings
 from django.db import transaction
+from django.contrib.auth.decorators import login_required
 
 from authapp.forms import ShopUserProfileUpdateForm
 from authapp.models import ShopUser
@@ -93,6 +94,7 @@ def verify(request, email, activation_key):
         return HttpResponseRedirect(reverse('main:index'))
 
 
+@login_required
 @transaction.atomic
 def update(request):
 

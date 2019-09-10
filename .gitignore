@@ -1,3 +1,7 @@
 venv/
 .idea/
 geekshop/.idea/
+/geekshop/tmp/email-messages/
+/geekshop/static/admin
+/geekshop/static/debug_toolbar
+/geekshop/static/django_extensions
