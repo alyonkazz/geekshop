@@ -2,41 +2,5 @@
 {% load static %}
 
 {% block container %}
-    {% include 'mainapp/includes/inc__main_menu.html' %}
-
-    <div>
-        <h2>Категория: "{{ category.name|title }}"</h2>
-        {% include 'mainapp/includes/inc__catalog_menu.html' %}
-
-        <div>
-            {% if category_catalog.has_previous %}
-                <a href="{% url 'main:category' category.pk 1 %}">
-                    <-
-                </a>
-                <a href="{% url 'main:category' category.pk category_catalog.previous_page_number %}">
-                    <
-                </a>
-            {% endif %}
-            <span>
-                страница {{ category_catalog.number }} из {{ category_catalog.paginator.num_pages }}
-            </span>
-            {% if category_catalog.has_next %}
-                <a href="{% url 'main:category' category.pk category_catalog.next_page_number %}">
-                    >
-                </a>
-                <a href="{% url 'main:category' category.pk category_catalog.paginator.num_pages %}">
-                      ->
-                </a>
-            {% endif %}
-
-
-        </div>
-        {% for product in category_catalog %}
-            <a href="{% url 'main:product' product.pk %}">
-                <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}" class="catalog_img">
-                <h3>{{ product.name }}</h3>
-                <p>{{ product.short_desc }}</p>
-            </a>
-        {% endfor %}
-    </div>
+    {% include 'mainapp/includes/inc_products_list_content.html' %}
 {% endblock %}

@@ -6,6 +6,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.cache import cache_page
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 from mainapp.management.commands.fill_db import load_from_json
 from mainapp.models import Product, ProductCategory
@@ -15,14 +18,12 @@ def get_catalog_menu():
     return ProductCategory.objects.all()
 
 
-# def get_hot_product():
-#     return random.choice(Product.objects.all())
-
-
 def get_same_products(hot_product):
     return hot_product.category.product_set.exclude(pk=hot_product.pk)
 
 
+# def get_hot_product():
+#     return random.choice(Product.objects.all())
 # def index(request):
 #     date = datetime.datetime.now()
 #     context = {
@@ -208,11 +209,12 @@ def catalog(request):
         'page_title': 'каталог',
         'catalog_menu': get_catalog_menu,
         'hot_product': hot_product,
-        'same_products': get_same_products(hot_product),
+        'same_products': same_products,
     }
     return render(request, 'mainapp/catalog.html', context)
 
 
+@cache_page(3600)
 def category(request, pk, page=1):
     pk = int(pk)
 
@@ -275,3 +277,40 @@ def contacts(request):
         "address": "11"
     }
     return render(request, 'mainapp/contacts.html', context)
+
+
+def category_ajax(request, pk=None, page=1):
+    if request.is_ajax():
+        links_menu = get_links_menu()
+
+        if pk:
+            if pk == '0':
+                category = {
+                    'pk': 0,
+                    'name': 'все'
+                }
+                products = get_products_ordered_by_price()
+            else:
+                category = get_category(pk)
+                products = get_products_in_category_ordered_by_price(pk)
+
+            paginator = Paginator(products, 2)
+            try:
+                products_paginator = paginator.page(page)
+            except PageNotAnInteger:
+                products_paginator = paginator.page(1)
+            except EmptyPage:
+                products_paginator = paginator.page(paginator.num_pages)
+
+            content = {
+                'links_menu': links_menu,
+                'category': category,
+                'products': products_paginator,
+            }
+
+            result = render_to_string(
+                'mainapp/includes/inc_products_list_content.html',
+                context=content,
+                request=request)
+
+            return JsonResponse({'result': result})
