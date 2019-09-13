@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import render, get_object_or_404
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import cache_page, never_cache
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 
@@ -201,6 +201,7 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
+@never_cache
 def catalog(request):
     hot_product = get_hot_product()
     same_products = get_same_products(hot_product)
@@ -245,6 +246,7 @@ def category(request, pk, page=1):
     return render(request, 'mainapp/category_catalog.html', context)
 
 
+@never_cache
 def product(request, pk):
     links_menu = get_links_menu()
     product = get_product(pk)
