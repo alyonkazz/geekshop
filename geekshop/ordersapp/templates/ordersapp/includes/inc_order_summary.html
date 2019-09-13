@@ -7,12 +7,27 @@
    <div class="">обновлен: {{ object.updated|date:"Y-m-d H:i:s" }}</div>
    <div class="">cтатус: {{ object.get_status_display }}</div>
    <hr>
-   <div class="">
-       общее количество товаров: <span class="order_total_quantity">{{ object.get_total_quantity }}</span>
-   </div>
-   <div class="">
-       общая стоимость: <span class="order_total_cost">{{ object.get_total_cost }}</span> руб
-   </div>
+{#   <div class="">#}
+{#       общее количество товаров: <span class="order_total_quantity">{{ object.get_total_quantity }}</span>#}
+{#   </div>#}
+{#   <div class="">#}
+{#       общая стоимость: <span class="order_total_cost">{{ object.get_total_cost }}</span> руб#}
+{#   </div>#}
+
+    {% with object_summary=object.get_summary %}
+        <div class="h4">
+            общее количество товаров:
+            <span class="order_total_quantity">
+               {{ object_summary.total_quantity }}
+           </span>
+        </div>
+        <div class="h3">
+            общая стоимость:
+            <span class="order_total_cost">
+               {{ object_summary.total_cost }}
+           </span> руб
+        </div>
+    {% endwith %}
 {% else %}
    <div class="">Новый заказ</div>
    <hr>
