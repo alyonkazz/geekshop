@@ -1,1 +1,7 @@
-http://192.168.2.8//order/read/24/
+http://192.168.2.8/
+http://192.168.2.8/products/
+http://192.168.2.8/contact/
+http://192.168.2.8/products/category/1/
+http://192.168.2.8/products/category/2/
+http://192.168.2.8/products/category/3/
+http://192.168.2.8/products/category/4/
