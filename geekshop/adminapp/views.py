@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import user_passes_test
+from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
@@ -162,15 +163,36 @@ class ProductCategoryCreateView(CreateView):
 
 
 class ProductCategoryUpdateView(UpdateView):
+    # model = ProductCategory
+    # success_url = reverse_lazy('myadmin:productcategory_list')
+    # form_class = ProductCategoryAdminUpdateForm
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['page_title'] = 'админка/редактирование категории товара'
+    #
+    #     return context
+
     model = ProductCategory
+    # template_name = 'adminapp/category_update.html'
     success_url = reverse_lazy('myadmin:productcategory_list')
     form_class = ProductCategoryAdminUpdateForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['page_title'] = 'админка/редактирование категории товара'
-
+        context['page_title'] = 'категории/редактирование'
         return context
+
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+            if discount:
+                self.object.product_set. \
+                    update(price=F('price') * (1 - discount / 100))
+                db_profile_by_type(self.__class__, 'UPDATE',
+                                   connection.queries)
+
+        return super().form_valid(form)
 
 
 # @user_passes_test(lambda x: x.is_superuser)

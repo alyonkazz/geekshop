@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 from django.forms import forms, ModelForm
+from django import forms
 
 from authapp.models import ShopUser
 from mainapp.models import ProductCategory, Product
@@ -61,9 +62,16 @@ class ShopUserAdminUpdateForm(UserCreationForm):
 
 
 class ProductCategoryAdminUpdateForm(ModelForm):
+    discount = forms.IntegerField(label='скидка',
+                                  required=False,
+                                  min_value=0,
+                                  max_value=90,
+                                  initial=0)
+
     class Meta:
         model = ProductCategory
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ()
 
     def __init__(self, *args, **kwargs):
         super(ProductCategoryAdminUpdateForm, self).__init__(*args, **kwargs)
