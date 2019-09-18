@@ -7,23 +7,36 @@
     <div class="catalog">
         {% include 'mainapp/includes/inc__catalog_menu.html' %}
     </div>
-    <div class="hotdeal">
-        <h2>Горячее предложение</h2>
+    {#    <div class="hotdeal">#}
+    {#        <h2>Горячее предложение</h2>#}
+    {#        <a href="{% url 'main:product' hot_product.pk %}">#}
+    {#            <img src="/media/{{ hot_product.image }}" alt="{{ hot_product.short_desc }}" class="hotdeal__img">#}
+    {#            <h3>{{ hot_product.name }}</h3>#}
+    {#            <p>{{ hot_product.short_desc }}</p>#}
+    {#        </a>#}
+    {#    </div>#}
+
+    <h2>Горячее предложение</h2>
+    {% if hot_product == 'no_products' %}
+        <div class="hotdeal">
+            <h3>Скоро тут появится новое предложение</h3>
+            <p> {{ products1 }}</p>
+        </div>
+    {% else %}
         <a href="{% url 'main:product' hot_product.pk %}">
             <img src="/media/{{ hot_product.image }}" alt="{{ hot_product.short_desc }}" class="hotdeal__img">
             <h3>{{ hot_product.name }}</h3>
             <p>{{ hot_product.short_desc }}</p>
         </a>
-    </div>
-    <div class="sameproducts">
-        <h2>Похожие товары</h2>
-        <a href="#">
-            {% for product in same_products %}
-            <img src="{{ product.image.url }}" alt="" class="sameproducts__img">
-            <h3>{{ product.name }}</h3>
-            <p>{{ product.short_desc }}</p>
-            {% endfor %}
-        </a>
-    </div>
-
+        <div class="sameproducts">
+            <h2>Похожие товары</h2>
+            <a href="#">
+                {% for product in same_products %}
+                    <img src="{{ product.image.url }}" alt="" class="sameproducts__img">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.short_desc }}</p>
+                {% endfor %}
+            </a>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -6,9 +6,10 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 from django.views.decorators.cache import cache_page, never_cache
 from django.template.loader import render_to_string
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 
 from mainapp.management.commands.fill_db import load_from_json
 from mainapp.models import Product, ProductCategory
@@ -16,10 +17,6 @@ from mainapp.models import Product, ProductCategory
 
 def get_catalog_menu():
     return ProductCategory.objects.all()
-
-
-def get_same_products(hot_product):
-    return hot_product.category.product_set.exclude(pk=hot_product.pk)
 
 
 # def get_hot_product():
@@ -135,8 +132,7 @@ def get_products():
         key = 'products'
         products = cache.get(key)
         if products is None:
-            products = Product.objects.filter(is_active=True,
-                                              category__is_active=True).select_related('category')
+            products = Product.objects.filter(is_active=True, category__is_active=True).select_related('category')
             cache.set(key, products)
         return products
     else:
@@ -189,7 +185,17 @@ def get_products_in_category_ordered_by_price(pk):
 def get_hot_product():
     products = get_products()
 
-    return random.sample(list(products), 1)[0]
+    try:
+        check_products = Product.objects.all()
+        if check_products[1] is not None:
+            return random.sample(list(products), 1)[0]
+    except Exception:
+        return 'no_products'
+
+
+def get_same_products(hot_product):
+    if hot_product != 'no_products':
+        return hot_product.category.product_set.exclude(pk=hot_product.pk)
 
 
 def index(request):
